@@ -29,8 +29,8 @@ def getTranscriptDict(transcription, padding=0.1):
     for segment in transcription:
         result.append({
             'id':segment['id'],
-            'start':segment['start'],
-            'end':segment['end']+padding,
+            'start': round(segment['start'], 2),
+            'end': round(segment['end']+padding, 2),
             'text':segment['text'].strip()
         })
     return result

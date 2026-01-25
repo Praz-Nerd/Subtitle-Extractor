@@ -17,19 +17,17 @@ def hello():
 
 @app.post('/extract')
 def extract():
-    print('work')
-    model = request.args.get('model', default='base')
     file = request.files.get('file')
     #audio_bytes = file.read()
     audio = load_audio_from_bytes(file.read())
     print('got encode')
-    srt = transcribe(audio)
+    segments = transcribe(audio)
 
-    return srt
+    return segments
 
 @app.post('/dummy-post')
 def dummy():
-    return {'response':'SWR works...', 'date':datetime.datetime.now()}
+    return [{'id': 1, 'start': 0, 'end': 10, 'text': 'hello'}, {'id': 2, 'start': 10, 'end': 20, 'text': 'world'}]
 
 
 

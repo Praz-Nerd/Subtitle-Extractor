@@ -1,20 +1,14 @@
-import { useState } from 'react'
-import './App.css'
-import FileUploader from './FileUploader'
-import type { Segment } from './types'
-
+import { Route, BrowserRouter as Router, Routes, Navigate } from 'react-router-dom'
+import Home from './Home'
 
 function App() {
-  
-  const [segments, setSegments] = useState<Segment[] | null>(null)
-
   return (
-    <>
-      <FileUploader
-      setSegments={setSegments}
-      />
-      {segments && segments.map((s)=><div>{s.text}</div>)}
-    </>
+    <Router>
+      <Routes>
+        <Route index path='/home' element={<Home />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
+      </Routes>
+    </Router>
   )
 }
 

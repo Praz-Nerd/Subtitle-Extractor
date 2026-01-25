@@ -15,6 +15,11 @@ const SegmentTable: React.FC<{ segments: Segment[] | null, setSegments: (segment
         setSegments(updated);
     }
 
+    const handleStartChange = (id: number, newStart: number) => {
+        if (!segments) return;
+        const updated = segments.map((s) => s.id === id ? { ...s, start: newStart } : s);
+        setSegments(updated);
+    }
 
     return (
         <TableContainer component={Paper}>
@@ -36,7 +41,14 @@ const SegmentTable: React.FC<{ segments: Segment[] | null, setSegments: (segment
                             <TableCell component="th" scope="row">
                                 {segment.id}
                             </TableCell>
-                            <TableCell align="left">{segment.start}</TableCell>
+                            <TableCell align="left">
+                                <TextField
+                                    type='number'
+                                    variant="standard"
+                                    value={segment.start}
+                                    onChange={(e) => handleStartChange(segment.id, Number(e.target.value))}
+                                />
+                            </TableCell>
                             <TableCell align="left">
                                 <TextField
                                     type='number'
